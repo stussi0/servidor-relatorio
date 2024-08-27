@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório de Radiações</title>
+</head>
+<body>
+    <h1>Laboratório de Radiações</h1>
+    <h3>Atenuação da Radiação - 24/08/2024</h3>
+    <h6>Prof. Dr. Luis Alberto Schwind Pedroso Stussi da Silva Pereira</h6>
+    <nav style="background-color: lightsalmon;">
+        <a href="/">Login</a>
+        <a href="/cadastrar">Criar Relatório</a>
+        <a href="/visualizar">Visualizar Relatório</a>
+    </nav>
+    <section style="background-color: lightblue; padding: 10px;">
+        <h5>Instruções</h5>
+        <p>Preencham os campos abaixos com o que for pedido</p>
+    </section>
+    <section style="background-color: lightgray; padding: 10px;">
+        <h3>Cadastro de Informações</h3>
+        <form id='cadastroForm'>
+            <hr>
+            <p>O título deve ser um nome que sintetize a temática do que foi feito no laboratório.</p>
+            <label for="titulo">Título: </label><br>
+            <input style="width: 95%;" type='text' name='titulo'><br>
+            <hr>
+            <p>O objetivo deve ser aquilo que o laboratório se propõe à provar, dessa forma o que o experimento apresentado pretende demonstrar para o experimentalista?</p>
+            <label for="objetivo">Objetivo: </label><br>
+            <textarea style="width: 95%; min-height: 150px;" name='introducao'></textarea><br>
+            <hr>
+            <p>As palavras chave são palavrar que ajudam à encontrar um relatório em uma lista de muitos outros relatórios. O que este esperimento tem de diferente de outros vários esperimentos que você já fez? Encontre 5 palavras que façam este esperimento ser fácil de achar!</p>
+            <label for="palavras_chave">Palavras-chave: </label><br>
+            <input style="width: 95%;" type='text' name='palavras_chave'><br>
+            <hr>
+            <p>Depois de terminar o relatório resuma-o de forma que em poucas palavras você consiga explicar para uma pessoa que não acompanhou sua experiência o que aconteceu e quais os resultados encontrados.</p>
+            <label for="resumo">Resumo: </label><br>
+            <textarea style="width: 95%; min-height: 150px;" name='resumo'></textarea><br>
+            <hr>
+            <p>Contextualise o leitor sobre o que é importante saber para entender o experimento que foi feito, usando como referências Livros, Artigos, Manuais de Fabricantes e Trabalhos Acadêmicos (Monografias, Disertações e Teses).</p>
+            <label for="introducao">Introdução: </label><br>
+            <textarea style="width: 95%; min-height: 150px;" name='introducao'></textarea><br>
+            <hr>
+            <p>Explique para o leitor todos os procedimentos usados por você para obter os resultados que você obteve. Seja bestante preciso e evite usar gírias ou linguagem leiga para a explicação. Ele deve ser uma receita de bolo, o qual deve-se especificar cada passo que influencia no resultado final do experimento.</p>
+            <label for="materiais">Materiais e Métodos: </label><br>
+            <textarea style="width: 95%; min-height: 150px;" name='materiais'></textarea><br>
+            <hr>
+            <p>São os resultados obtidos no experimento, sem interpretação alguma, apenas o que for observado e mensurado.</p>
+            <label for="resultados">Resultados: </label><br>
+            <textarea style="width: 95%; min-height: 150px;" name='resultados'></textarea><br>
+            <hr>
+            <p>A conclusão deve ser a sua interpretação do fenômeno observado. Ela é de carater pessoal, logo você deve analisar os resultados obtidos e concluir utilizando sua dedução lógica e conhecimento prévio o que você acha que ocorreu no experimento.</p>
+            <label for="conclusao">Conclusão: </label><br>
+            <textarea style="width: 95%; min-height: 150px;" name='conclusao'></textarea><br>
+            <hr>
+            <p>A bibliografia deve incluir todos os autores e trabalhos citados ao longo do relatório. E lembre-se todo o trabalho que não for citados acarreta em plágio. Em resumo toda afirmação feita no texto, que não esteja na conclusão e resultados deve ser citada e esta citação deve ser referenciada no tópico Bibliografia.</p>
+            <label for="bibliografia">Bibliografia: </label><br>
+            <textarea style="width: 95%; min-height: 150px;" name='bibliografia'></textarea><br>
+            <hr>
+            <button style="margin: 20px; padding: 25px;" type='button' onclick='cadastrar()'>Cadastrar</button>
+        </form>
+        <script>
+            function cadastrar() {
+                const form = document.getElementById('cadastroForm');
+                const data = {};
+                for (const input of form.elements) {
+                    if (input.name) data[input.name] = input.value;
+                }
+                fetch('/cadastrar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                }).then(response => response.text()).then(alert);
+            }
+        </script>
+    </section>
+</body>
+</html>
