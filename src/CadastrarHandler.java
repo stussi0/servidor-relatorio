@@ -14,6 +14,7 @@ public class CadastrarHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         if ("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
             String requestBody = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
+            System.out.println(requestBody);
             String user = getUserFromCookie(exchange);
 
             if (user != null) {
